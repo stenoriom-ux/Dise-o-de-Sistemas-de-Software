@@ -4,31 +4,33 @@ interface Product {
     fun descripcion(): String
 }
 
-class PendientePersonalizado : Product {
-    override fun descripcion(): String = "pendiente personalizado"
+class ConcreteProduct : Product {
+    override fun descripcion(): String {
+        return "producto concreto"
+    }
 }
 
-abstract class TallerPendiente {
+abstract class Creator {
 
     fun prepararPedido(): String {
-        val producto = crearProducto()
+        val producto = create()
         return "Pedido preparado para ${producto.descripcion()}"
     }
 
-    protected abstract fun crearProducto(): Product
+    abstract fun create(): Product
 }
 
-class TallerLocal : TallerPendiente() {
+class ConcreteCreator : Creator() {
 
-    override fun crearProducto(): Product {
-        return PendientePersonalizado()
+    override fun create(): Product {
+        return ConcreteProduct()
     }
 }
 
 class FactoryMethodDemo {
 
     fun ejecutar(): String {
-        val taller: TallerPendiente = TallerLocal()
-        return taller.prepararPedido()
+        val creator: Creator = ConcreteCreator()
+        return creator.prepararPedido()
     }
 }
