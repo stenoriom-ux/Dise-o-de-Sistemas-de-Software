@@ -5,9 +5,13 @@ interface Producto {
     fun descripcion(): String
 }
 
-// Concrete Product
-class Bicicleta : Producto {
-    override fun descripcion(): String = "bicicleta de montaña"
+// Concrete Products
+class ProductoFisico : Producto {
+    override fun descripcion(): String = "producto físico enviado por mensajería"
+}
+
+class ProductoDigital : Producto {
+    override fun descripcion(): String = "producto digital disponible para descarga"
 }
 
 // Creator
@@ -22,16 +26,21 @@ abstract class TallerPendiente {
     protected abstract fun crearProducto(): Producto
 }
 
-// Concrete Creator
-class TallerBicicletas : TallerPendiente() {
-    override fun crearProducto(): Producto {
-        return Bicicleta()
-    }
+// Concrete Creators
+class TallerFisico : TallerPendiente() {
+    override fun crearProducto(): Producto = ProductoFisico()
+}
+
+class TallerDigital : TallerPendiente() {
+    override fun crearProducto(): Producto = ProductoDigital()
 }
 
 class FactoryMethodDemo {
     fun ejecutar(): String {
-        val taller: TallerPendiente = TallerBicicletas()
+
+        // El cliente trabaja con la abstracción
+        val taller: TallerPendiente = TallerDigital()
+
         return taller.prepararPedido()
     }
 }
