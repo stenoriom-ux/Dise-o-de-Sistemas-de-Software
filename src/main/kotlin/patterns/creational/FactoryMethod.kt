@@ -1,37 +1,34 @@
 package patterns.creational
 
-// PRODUCT
-interface Product {
-    fun description(): String
+interface ProductoPendienteFactoryMethod {
+    fun descripcion(): String
 }
 
-// CONCRETE PRODUCT
-class ProductoDigital : Product {
-    override fun description(): String = "producto digital descargable"
+class PendientePersonalizado : ProductoPendienteFactoryMethod {
+    override fun descripcion(): String = "pendiente personalizado"
 }
 
-// CREATOR
-abstract class Creator {
+abstract class TallerPendiente {
 
-    fun createOrder(): String {
-        val product = createProduct()
-        return "Pedido preparado para ${product.description()}"
+    fun prepararPedido(): String {
+        val producto = crearProductoPendiente()
+        return "Pedido preparado para ${producto.descripcion()}"
     }
 
-    protected abstract fun createProduct(): Product
+    protected abstract fun crearProductoPendiente(): ProductoPendienteFactoryMethod
 }
 
-// CONCRETE CREATOR
-class DigitalStore : Creator() {
-    override fun createProduct(): Product {
-        return ProductoDigital()
+class TallerLocal : TallerPendiente() {
+
+    override fun crearProductoPendiente(): ProductoPendienteFactoryMethod {
+        return PendientePersonalizado()
     }
 }
 
-// CLIENT
 class FactoryMethodDemo {
+
     fun ejecutar(): String {
-        val creator: Creator = DigitalStore()
-        return creator.createOrder()
+        val taller: TallerPendiente = TallerLocal()
+        return taller.prepararPedido()
     }
 }
