@@ -1,47 +1,38 @@
 package patterns.creational
 
-// Product
-interface Producto {
-    fun descripcion(): String
+// PRODUCT
+interface Product {
+    fun description(): String
 }
 
-// Concrete Products
-class ProductoFisico : Producto {
-    override fun descripcion(): String = "producto físico enviado por mensajería"
+// CONCRETE PRODUCT
+class ProductoDigital : Product {
+    override fun description(): String = "producto digital descargable"
 }
 
-class ProductoDigital : Producto {
-    override fun descripcion(): String = "producto digital disponible para descarga"
-}
+// CREATOR
+abstract class Creator {
 
-// Creator
-abstract class TallerPendiente {
-
-    fun prepararPedido(): String {
-        val producto = crearProducto()
-        return "Pedido preparado para ${producto.descripcion()}"
+    fun createOrder(): String {
+        val product = createProduct()
+        return "Pedido preparado para ${product.description()}"
     }
 
-    // Factory Method
-    protected abstract fun crearProducto(): Producto
+    protected abstract fun createProduct(): Product
 }
 
-// Concrete Creators
-class TallerFisico : TallerPendiente() {
-    override fun crearProducto(): Producto = ProductoFisico()
+// CONCRETE CREATOR
+class DigitalStore : Creator() {
+    override fun createProduct(): Product {
+        return ProductoDigital()
+    }
 }
 
-class TallerDigital : TallerPendiente() {
-    override fun crearProducto(): Producto = ProductoDigital()
-}
-
+// CLIENT
 class FactoryMethodDemo {
     fun ejecutar(): String {
-
-        // El cliente trabaja con la abstracción
-        val taller: TallerPendiente = TallerDigital()
-
-        return taller.prepararPedido()
+        val creator: Creator = DigitalStore()
+        return creator.createOrder()
     }
 }
 "paso-1: implemento metodo fabrica"
