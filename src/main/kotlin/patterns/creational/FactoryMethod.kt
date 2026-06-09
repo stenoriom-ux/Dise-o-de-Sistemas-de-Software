@@ -1,3 +1,5 @@
+package patterns.creational
+
 // PRODUCT
 interface Product {
     fun description(): String
