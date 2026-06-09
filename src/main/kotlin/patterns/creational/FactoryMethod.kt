@@ -1,10 +1,10 @@
 package patterns.creational
 
-interface Product {
+interface Producto {
     fun descripcion(): String
 }
 
-class ConcreteProduct : Product {
+class ConcreteProduct : Producto {
     override fun descripcion(): String {
         return "producto concreto"
     }
@@ -17,12 +17,12 @@ abstract class Creator {
         return "Pedido preparado para ${producto.descripcion()}"
     }
 
-    abstract fun create(): Product
+    abstract fun create(): Producto
 }
 
 class ConcreteCreator : Creator() {
 
-    override fun create(): Product {
+    override fun create(): Producto {
         return ConcreteProduct()
     }
 }
