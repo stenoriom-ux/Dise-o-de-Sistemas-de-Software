@@ -44,3 +44,4 @@ class FactoryMethodDemo {
         return taller.prepararPedido()
     }
 }
+"paso-1: implemento metodo fabrica"
