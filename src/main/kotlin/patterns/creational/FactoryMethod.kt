@@ -7,7 +7,7 @@ interface Product {
 
 // CONCRETE PRODUCT
 class ProductoDigital : Product {
-    override fun description(): String = "producto digital descargable"
+    override fun description(): String = "producto digital"
 }
 
 // CREATOR
@@ -22,16 +22,14 @@ abstract class Creator {
 }
 
 // CONCRETE CREATOR
-class DigitalStore : Creator() {
-    override fun createProduct(): Product {
-        return ProductoDigital()
-    }
+class DigitalCreator : Creator() {
+    override fun createProduct(): Product = ProductoDigital()
 }
 
 // CLIENT
 class FactoryMethodDemo {
     fun ejecutar(): String {
-        val creator: Creator = DigitalStore()
+        val creator: Creator = DigitalCreator()
         return creator.createOrder()
     }
 }
