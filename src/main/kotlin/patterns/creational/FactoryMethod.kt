@@ -1,26 +1,26 @@
 package patterns.creational
 
-interface ProductoPendienteFactoryMethod {
+interface Product {
     fun descripcion(): String
 }
 
-class PendientePersonalizado : ProductoPendienteFactoryMethod {
+class PendientePersonalizado : Product {
     override fun descripcion(): String = "pendiente personalizado"
 }
 
 abstract class TallerPendiente {
 
     fun prepararPedido(): String {
-        val producto = crearProductoPendiente()
+        val producto = crearProducto()
         return "Pedido preparado para ${producto.descripcion()}"
     }
 
-    protected abstract fun crearProductoPendiente(): ProductoPendienteFactoryMethod
+    protected abstract fun crearProducto(): Product
 }
 
 class TallerLocal : TallerPendiente() {
 
-    override fun crearProductoPendiente(): ProductoPendienteFactoryMethod {
+    override fun crearProducto(): Product {
         return PendientePersonalizado()
     }
 }
